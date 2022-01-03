@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import "./App.scss";
+import Header from "./Component/Header";
+import Footer from "./Component/Footer";
+import Homepage from "./Screens/Homepage";
+import DefaultError from "./Screens/DefaultError";
+import MovieList from "./Screens/MovieList";
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <Router>
+        <div>
+          {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+          <Switch>
+            <Route exact path="/">
+              <Homepage />
+            </Route>
+            <Route path="/MovieDetails">
+              <MovieList />
+            </Route>
+            <Route>
+              <DefaultError />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+      <Footer />
     </div>
   );
 }
